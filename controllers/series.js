@@ -26,7 +26,7 @@ const novaProcess = async ({Serie}, req, res)=> {
 }
 
 const novaForm = (req, res) => {
-    res.render('series/nova')
+    res.render('series/nova', {errors:[]})
 }
 
 const excluir = async ({Serie}, req, res) =>{
@@ -43,14 +43,14 @@ const editarProcess = async ({Serie}, req, res)=> {
         serie.save()
         res.redirect('/series')
         }catch(e){
-            res.render('series/editar', {serie, labels, errors:Objeject.keys(e.errors)})
+            res.render('series/editar', {serie, labels, errors: Object.keys(e.errors)})
         }
 
 }
 
 const editarForm = async ({Serie}, req, res) => {
     const serie = await Serie.findOne({_id: req.params.id})
-        res.render('series/editar', {serie, labels})
+        res.render('series/editar', {serie, labels, errors:[]})
   
 }
 
